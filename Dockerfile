@@ -13,6 +13,8 @@ RUN pecl install mongodb
 RUN docker-php-ext-install bcmath
 RUN echo "extension=mongodb.so" >> /usr/local/etc/php/conf.d/mongodb.ini
 
+RUN apt install -y git
+
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 RUN a2enmod rewrite

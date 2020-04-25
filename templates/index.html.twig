@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+    {% block head %}
+    <meta charset="UTF-8">
+    {% block css_files %}
+    <link type="text/css" href="css/main.css">
+    {% endblock %}
+    <title>{% block title %}Index page{% endblock %}</title>
+    {% endblock %}
+</head>
+<body>
+    <header>
+        Menu
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+
+        <aside>
+            {% block sidebar %}
+                <h1>Sidebar title</h1>
+            {% endblock %}
+        </aside>
+    </main>
+    <footer>
+        &copy; 2020, Hillel IT School
+    </footer>
+</body>
+</html>

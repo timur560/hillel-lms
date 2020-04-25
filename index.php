@@ -1,72 +1,69 @@
 <?php
 
+use App\Entity\User;
+
 require_once 'vendor/autoload.php';
+require_once 'config/twig.php';
+require_once 'config/doctrine.php';
 
-//$collection->deleteOne(['id' => 1]);
+//$users = User::findAll();
 
-//$pdo = new PDO('mysql:host=mysql;port=3306;dbname=blog', 'root', 'secret');
-//$usersRepository = new \App\Repository\User\PdoUserRepository($pdo);
 
-//$client = new MongoDB\Client('mongodb://root:example@mongo:27017');
-//$usersRepository = new \App\Repository\User\MongoUserRepository($client);
+$userRepository = $entityManager->getRepository(User::class);
 
-//$service = new \App\Service\FindUserService($usersRepository);
-//$user = $service->execute(1);
+//var_dump($userRepository);
+
+//$users = $userRepository->findAll();
+
+//$user = $userRepository->find(1);
+
+//$users = $userRepository->findOneBy(['email' => 'test@test.com']);
+
+//$users = $userRepository->findBy(['email' => 'test@test.com']);
+
+//$sql = 'select * from users u where id = :id';
+
+//$dql = 'select u from App\Entity\User u where u.id = :id';
+//$query = $entityManager->createQuery($dql);
+//$query->setParameter(':id', 1);
+//$result = $query->execute();
+
+
+//$qb = $entityManager->createQueryBuilder();
+//
+//$qb
+//    ->select('u')
+//    ->from(User::class, 'u')
+//    ->where('u.id = :id')
+//    ->setParameter(':id', 1)
+//    ->setMaxResults(10)
+//    ->orderBy('u.id', 'DESC');
+//
+//$query = $qb->getQuery();
+//
+//$result = $query->execute();
+//
+////var_dump($query);
+//
+//var_dump($result);
+
+//var_dump($users);
+
+//$user = new User();
+//$user->setEmail('some@another.com');
+//$user->setPassword('444444');
+//$user->setCreatedAt(new DateTime());
+//$user->setUpdatedAt(new DateTime());
+//
 //var_dump($user);
-
-$requestStr = $_SERVER['REQUEST_METHOD'] . ' ' . $_SERVER['REQUEST_URI'];
-
-//var_dump($requestStr);
-
-
-// (new UsersController())->showAction();
-
-//$routes = [
-//    [
-//        'path' => '/users',
-//        'controller' => \App\Controller\UsersController::class,
-//        'action' => 'show',
-//        'method' => 'GET',
-//    ],
-//    [
-//        'path' => '/posts',
-//        'controller' => \App\Controller\PostsController::class,
-//        'action' => 'show',
-//        'method' => 'GET',
-//    ],
-//];
-
-// preg_match_all('/(?<method>[A-Z]{3,6}) (?<path>\/[a-z\/\d]*)/', $requestStr, $parts);
-
-//preg_match_all('/(?<method>[A-Z]{3,6}) \/(?<controller>[a-zA-Z]*)\/(?<action>[a-zA-Z]*)/', $requestStr, $parts);
-//// /users/show
 //
-//$controllerName = 'App\\Controller\\' . ucfirst($parts['controller'][0]) . 'Controller';
+//$entityManager->persist($user);
 //
-//$methodName = $parts['action'][0] . 'Action';
+//$entityManager->flush();
 //
-//(new $controllerName)->$methodName();
-//
-////
-//var_dump($controllerName, $methodName);
 
-//foreach ($routes as $route) {
-//    if ($route['path'] === $parts['path'][0] && $route['method'] === $parts['method'][0]) {
-//        $controller = new $route['controller'];
-//        $methodName = $route['action'] . 'Action';
-//        $controller->$methodName();
-//    }
-//}
+$user = $entityManager->getRepository(User::class)->find(1);
 
-$reflectionClass = new ReflectionClass(\App\Controller\UsersController::class);
+$entityManager->remove($user);
 
-foreach ($reflectionClass->getMethods() as $method) {
-    $docComment = $method->getDocComment();
-    preg_match('/@Route\("(?<path>[a-z\/]+)"\)/', $docComment, $matches);
-
-    if ($matches['path'] === $_SERVER['REQUEST_URI']) {
-        $method->invoke($reflectionClass->newInstance());
-        break;
-    }
-}
-
+$entityManager->flush();

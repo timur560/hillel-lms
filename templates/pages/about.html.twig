@@ -1,0 +1,17 @@
+{% extends "index.html.twig" %}
+
+{% block title %}About page{% endblock %}
+
+{% block css_files %}
+    {{ parent() }}
+    <link rel="stylesheet" href="css/about.css">
+{% endblock %}
+
+{% block content %}
+<h1>About page</h1>
+{% endblock %}
+
+{% block sidebar %}
+    <a href="tel:4345345345">958379845</a>
+    {{ parent() }}
+{% endblock %}
