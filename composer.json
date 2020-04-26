@@ -8,6 +8,7 @@
     "mongodb/mongodb": "^1.6",
     "ext-pdo": "*",
     "twig/twig": "^3.0",
-    "doctrine/orm": "^2.7"
+    "doctrine/orm": "^2.7",
+    "doctrine/migrations": "^2.2"
   }
 }

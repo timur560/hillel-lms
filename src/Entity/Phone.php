@@ -3,37 +3,29 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class User
+ * Class Phone
  * @package App\Entity
- * @ORM\Entity
- * @ORM\Table(name="users")
+ * @ORM\Entity()
+ * @ORM\Table(name="phones")
  */
-class User
+class Phone
 {
     /**
      * @var int
      * @ORM\Column(type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\Id()
+     * @ORM\GeneratedValue()
      */
     private $id;
 
     /**
      * @var string
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string")
      */
-    private $email;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", length=50, nullable=false)
-     */
-    private $password;
+    private $phone;
 
     /**
      * @var \DateTime
@@ -48,15 +40,10 @@ class User
     private $updatedAt;
 
     /**
-     * @var Collection
-     * @ORM\OneToMany(targetEntity="Phone", mappedBy="user")
+     * @var User|null
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="phones")
      */
-    private $phones;
-
-    public function __construct()
-    {
-        $this->phones = new ArrayCollection();
-    }
+    private $user;
 
     /**
      * @return int
@@ -77,33 +64,17 @@ class User
     /**
      * @return string
      */
-    public function getEmail(): string
+    public function getPhone(): string
     {
-        return $this->email;
+        return $this->phone;
     }
 
     /**
-     * @param string $email
+     * @param string $phone
      */
-    public function setEmail(string $email): void
+    public function setPhone(string $phone): void
     {
-        $this->email = $email;
-    }
-
-    /**
-     * @return string
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param string $password
-     */
-    public function setPassword(string $password): void
-    {
-        $this->password = $password;
+        $this->phone = $phone;
     }
 
     /**
@@ -139,11 +110,19 @@ class User
     }
 
     /**
-     * @return Collection
+     * @return User|null
      */
-    public function getPhones(): Collection
+    public function getUser(): ?User
     {
-        return $this->phones;
+        return $this->user;
+    }
+
+    /**
+     * @param User $user
+     */
+    public function setUser(?User $user): void
+    {
+        $this->user = $user;
     }
 
 
