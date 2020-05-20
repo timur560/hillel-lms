@@ -46,6 +46,12 @@ class Lesson
     private ?\DateTime $updatedAt;
 
     /**
+     * @var Group|null
+     * @ORM\ManyToOne(targetEntity="Group", inversedBy="lessons")
+     */
+    private ?Group $group;
+
+    /**
      * @return int|null
      */
     public function getId(): ?int
@@ -123,6 +129,22 @@ class Lesson
     public function setUpdatedAt(?\DateTime $updatedAt): void
     {
         $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return Group|null
+     */
+    public function getGroup(): ?Group
+    {
+        return $this->group;
+    }
+
+    /**
+     * @param Group|null $group
+     */
+    public function setGroup(?Group $group): void
+    {
+        $this->group = $group;
     }
 
 
